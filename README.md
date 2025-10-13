@@ -1,290 +1,924 @@
-# DeltaYurt - Live Classroom Platform
-
-Интерактивная образовательная платформа с поддержкой живых уроков, симуляций и интерактивных заданий.
-
-## 🚀 Быстрый старт
-
-### Установка и запуск
-
-1. **Установите зависимости:**
-   ```bash
-   npm install
-   cd server && npm install
-   ```
-
-2. **Запустите сервер и frontend:**
-   ```bash
-   # В одном терминале - сервер
-   cd server && npm run dev
-   
-   # В другом терминале - frontend
-   npm run dev:frontend
-   ```
-
-3. **Откройте приложение:**
-   - Frontend: http://localhost:8081
-   - Server API: http://localhost:3005
-
-4. **Альтернативно - запуск обеих частей одновременно:**
-   ```bash
-   npm run dev:both
-   ```
-
-## 🌍 Многоязычность (i18n)
-
-### Поддерживаемые языки
-- 🇺🇸 **English** (en) - основной язык
-- 🇷🇺 **Русский** (ru) - полная поддержка
-- 🇰🇬 **Кыргызча** (ky) - полная поддержка
-
-### Переключение языков
-- Используйте переключатель языков в правом верхнем углу
-- Выбор языка сохраняется в localStorage
-- Автоматическое определение языка браузера
-
-### Добавление нового языка
-
-1. **Создайте папку для языка:**
-   ```bash
-   mkdir -p public/locales/{lang}/{common,teacher,student,sim}
-   ```
-
-2. **Скопируйте файлы переводов:**
-   ```bash
-   cp public/locales/en/*.json public/locales/{lang}/
-   ```
-
-3. **Обновите конфигурацию:**
-   - Добавьте язык в `src/i18n.ts`
-   - Обновите `src/components/ui/LanguageSwitcher.tsx`
-
-### Автоматический перевод
-
-#### DeepL API (рекомендуется)
-```bash
-# Установите API ключ
-export DEEPL_API_KEY="your_deepl_api_key"
-
-# Запустите автоматический перевод
-npm run translate:deepl
-```
-
-#### Google Translate API
-```bash
-# Установите API ключ
-export GOOGLE_API_KEY="your_google_api_key"
-
-# Запустите автоматический перевод
-npm run translate:google
-```
-
-#### Ручной перевод
-1. Переведите файлы в `public/locales/{lang}/`
-2. Проверьте качество переводов
-3. Протестируйте в приложении
-
-### Структура переводов
-```
-public/locales/
-├── en/                 # Английский (исходный)
-│   ├── common.json     # Общие переводы
-│   ├── teacher.json    # Переводы для учителей
-│   ├── student.json    # Переводы для студентов
-│   └── sim.json        # Переводы симуляций
-├── ru/                 # Русский
-└── ky/                 # Кыргызский
-```
-
-## 🔑 Тестовые аккаунты
-
-### Учитель
-- **Email:** `teacher@deltayurt.test`
-- **Пароль:** `password123`
-- **Код класса:** `DY-TEST1`
-
-### Студенты
-- **Email:** `student1@deltayurt.test` / `student2@deltayurt.test`
-- **Пароль:** `password123`
-- **Код класса:** `DY-TEST1`
-
-## 🎯 Основные функции
-
-### 🏫 Управление классами
-- **Множественные классы** - учителя могут создавать и управлять несколькими классами
-- **Уникальные коды классов** - автоматическая генерация кодов для подключения студентов
-- **Переключение между классами** - быстрый доступ к разным классам
-- **Статистика по классам** - отдельная аналитика для каждого класса
-
-### 💬 Живая классная комната
-- **Интерактивный чат** - общение между учителем и студентами в реальном времени
-- **Поднятие руки** - студенты могут запросить слово, учитель видит очередь
-- **Управление презентацией** - контроль симуляций и контента
-- **Активность в реальном времени** - отслеживание подключенных студентов
-
-### 📅 Календарь и расписание
-- **Создание событий** - уроки, дедлайны, экзамены, встречи
-- **Автоматические дедлайны** - домашние задания автоматически добавляются в календарь
-- **Фильтрация по типам** - удобная навигация по событиям
-- **Синхронизация** - события обновляются в реальном времени
-
-### 🏆 Профили и достижения
-- **Персональные профили** - редактирование информации, аватары
-- **Система достижений** - бейджи за различные активности
-- **Статистика прогресса** - детальная аналитика успеваемости
-- **Рейтинговая система** - соревновательный элемент обучения
-
-### 📚 Библиотека ресурсов
-- **Загрузка файлов** - PDF, изображения, документы, видео
-- **Организация по категориям** - уроки, симуляции, задания
-- **Поиск и фильтрация** - быстрый поиск нужных материалов
-- **Теги и описания** - удобная категоризация контента
-
-### 🎮 Геймификация
-- **Лидерборд** - рейтинг студентов по различным метрикам
-- **Пьедестал почета** - топ-3 студентов с анимациями
-- **Система очков** - начисление баллов за активность
-- **Достижения** - разблокировка бейджей за прогресс
-
-### 🌙 Темная тема
-- **Три режима** - светлая, темная, системная
-- **Автоматическое переключение** - следование системным настройкам
-- **Сохранение предпочтений** - запоминание выбранной темы
-- **Плавные переходы** - анимированное переключение тем
-
-## 🛠️ Технологии
-
-- **Frontend:** React + TypeScript + Vite
-- **UI:** Tailwind CSS + shadcn/ui
-- **State:** Zustand
-- **Real-time:** Socket.IO
-- **Animations:** Framer Motion
-- **Charts:** Recharts
-- **Backend:** Express + Socket.IO + TypeScript
-
-## 📡 API Endpoints
-
-### REST API
-- `GET /api/classes/:code` - получить информацию о классе
-- `POST /api/homeworks/:homeworkId/grade` - оценить задание
-
-### Socket.IO Events
-
-#### Клиент → Сервер
-- `register_user` - регистрация пользователя
-- `join_class` - присоединение к классу
-- `teacher_create_class` - создание нового класса
-- `teacher_start_lesson` - начало урока
-- `teacher_present_simulation` - управление симуляцией
-- `teacher_stop_presentation` - остановка презентации
-- `new_homework` - публикация задания
-- `submit_homework` - отправка решения
-- `grade_submission` - оценка работы
-- `chat_message` - отправка сообщения в чат
-- `raise_hand` - поднятие руки студентом
-- `lower_hand` - опускание руки студентом
-- `teacher_give_floor` - предоставление слова студенту
-- `pin_message` - закрепление сообщения
-- `delete_message` - удаление сообщения
-- `request_help` - запрос помощи от студента
-- `calendar_event_created` - создание события календаря
-- `calendar_event_updated` - обновление события календаря
-- `calendar_event_deleted` - удаление события календаря
-- `resource_uploaded` - загрузка ресурса
-- `badge_awarded` - награждение достижением
-
-#### Сервер → Клиент
-- `new_student_joined` - новый студент присоединился
-- `class_created` - класс создан
-- `presentation_simulation_update` - обновление симуляции
-- `presentation_stopped` - презентация остановлена
-- `homework_published` - новое задание
-- `homework_submitted` - задание сдано
-- `submission_graded` - работа оценена
-- `chat_message` - новое сообщение в чате
-- `raise_hand` - студент поднял руку
-- `lower_hand` - студент опустил руку
-- `teacher_give_floor` - слово предоставлено студенту
-- `message_pinned` - сообщение закреплено
-- `message_deleted` - сообщение удалено
-- `help_requested` - запрос помощи от студента
-- `system_message` - системное сообщение
-- `class_state` - полное состояние класса
-
-## 🎮 Демо-функции
-
-### Тестирование live classroom:
-1. Войдите как учитель
-2. Нажмите "Открыть классную комнату"
-3. Начните урок и управляйте симуляцией
-4. Войдите как студент в другом браузере
-5. Присоединитесь к уроку и наблюдайте за симуляцией
-
-### Тестирование заданий:
-1. Учитель публикует задание в классной комнате
-2. Студенты получают уведомление
-3. Выполняют задание и отправляют
-4. Учитель видит результаты в реальном времени
-
-### Демо-кнопки (только для учителей):
-- **Добавить демо-студентов** - создает 5 тестовых студентов
-- **Создать демо-задание** - добавляет тестовое задание
-- **Симулировать активность** - генерирует случайную активность студентов
-
-## 🔧 Разработка
-
-### Структура проекта
-```
-src/
-├── components/
-│   ├── classroom/     # Live classroom компоненты
-│   ├── teacher/       # Интерфейс учителя
-│   ├── student/       # Интерфейс студента
-│   └── ui/           # UI компоненты
-├── store/            # Zustand stores
-├── types/            # TypeScript типы
-└── pages/            # Страницы приложения
-
-server/
-├── index.ts          # Express + Socket.IO сервер
-├── seed.ts           # Тестовые данные
-└── package.json      # Зависимости сервера
-```
-
-### Добавление новых симуляций
-1. Создайте компонент в `src/components/classroom/`
-2. Добавьте тип в `src/types/index.ts`
-3. Обновите `SimulationViewer` для поддержки нового типа
-4. Добавьте параметры в `SimulationControlPanel`
-
-## 🚀 Деплой
-
-### Vercel (Frontend)
-```bash
-npm run build
-vercel --prod
-```
-
-### Netlify (Frontend)
-```bash
-npm run build
-netlify deploy --prod
-```
-
-### Server
-Рекомендуется использовать VPS с Node.js или Docker.
-
-## 📝 Лицензия
-
-MIT License - см. файл LICENSE для деталей.
-
-## 🤝 Вклад в проект
-
-1. Fork репозитория
-2. Создайте feature branch
-3. Commit изменения
-4. Push в branch
-5. Создайте Pull Request
+Ниже готовые файлы. Скопируй их в корень репозитория `kabylovtl-dotcom/DeltaYurt` с сохранением путей. Потом создай PR `admission-polish` → `main`.
 
 ---
 
-**DeltaYurt** - делаем образование интерактивным! 🎓✨
+## README.md
+
+```markdown
+# DeltaYurt
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/PROJECT_BADGE/deploy-status)](#)
+![Build](https://img.shields.io/badge/build-CI-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+**Live:** https://deltayurt.netlify.app
+
+DeltaYurt — живой онлайн‑класс по физике: интерактивные симуляции, многоязычие EN/RU/KY, мгновенная обратная связь.
+
+## Demo
+> Вставь GIF/видео 10–20c из `docs/demo.gif`.
+
+## Стек
+- React + TypeScript
+- Vite (или Next/Vite — уточни)
+- Socket.IO (реалтайм)
+- i18n JSON (EN/RU/KY)
+- Netlify (хостинг)
+
+## Архитектура
+```
+
+src/
+app/               # провайдеры, роутер
+features/          # модули уроков и симов
+entities/          # модели (Lesson, User, Sim)
+shared/            # ui, lib, hooks, api
+i18n/              # en.json, ru.json, ky.json
+
+````
+
+## Метрики (на сегодня)
+- 200+ learners
+- X уроков/мес
+- Avg session: Y минут
+- Retention D7: Z%
+
+## Как запустить за 60 секунд
+```bash
+node -v   # >= 20
+npm ci || npm install
+npm run dev
+````
+
+Открой [http://localhost:5173](http://localhost:5173) (или порт фреймворка).
+
+## Сборка и деплой
+
+```bash
+npm run build
+```
+
+Netlify собирает из `main`. Для PR — Deploy Previews.
+
+## Локализация
+
+* Все строки — только ключи i18n
+* Скрипт проверки «нет пропусков» (todo)
+
+## Безопасность и приватность
+
+См. [SECURITY.md](SECURITY.md). Нет трекинга PII. Web Vitals только агрегировано.
+
+## Дорожная карта
+
+* [ ] Тесты: vitest + @testing-library/react
+* [ ] e2e: Playwright
+* [ ] Sentry для фронта
+* [ ] PWA (оффлайн‑кэш основных симуляций)
+
+## Лицензия
+
+MIT — см. [LICENSE](LICENSE).
+
+````
+
+---
+
+## LICENSE (MIT)
+```text
+MIT License
+
+Copyright (c) 2025 kabylovtl
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+````
+
+---
+
+## netlify.toml
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/_/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"
+
+# Caching
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+```
+
+---
+
+## .github/workflows/ci.yml
+
+```yaml
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install
+        run: |
+          npm ci || npm install
+      - name: Lint
+        run: |
+          if npm run -s | grep -q '^lint$'; then npm run lint; else echo 'no lint'; fi
+      - name: Typecheck
+        run: |
+          if npm run -s | grep -q '^typecheck$'; then npm run typecheck; else echo 'no typecheck'; fi
+      - name: Test
+        run: |
+          if npm run -s | grep -q '^test$'; then npm test -- --coverage; else echo 'no tests'; fi
+      - name: Build
+        run: |
+          if npm run -s | grep -q '^build$'; then npm run build; else echo 'no build'; fi
+```
+
+---
+
+## CODE_OF_CONDUCT.md
+
+```markdown
+# Code of Conduct
+
+Мы придерживаемся [Contributor Covenant](https://www.contributor-covenant.org/), версия 2.1.
+
+Оскорбления, дискриминация и домогательства неприемлемы. Нарушения сообщайте на `maintainer@deltayurt.example`.
+```
+
+---
+
+## SECURITY.md
+
+```markdown
+# Security Policy
+
+## Supported Versions
+Текущее `main`.
+
+## Reporting a Vulnerability
+Пишите на `security@deltayurt.example` с шагами воспроизведения. Мы ответим в течение 7 дней. Не публикуйте детали до фикса.
+```
+
+---
+
+## CONTRIBUTING.md
+
+```markdown
+# Contributing
+
+1. Форк → ветка `feature/<short>`
+2. `npm ci` → `npm run dev`
+3. Тесты: `npm test` (если есть)
+4. PR в `main` с описанием и скрином/видео
+
+Стиль: TypeScript strict, ESLint + Prettier.
+```
+
+---
+
+## .github/ISSUE_TEMPLATE/bug_report.md
+
+```markdown
+---
+name: Bug report
+about: Report a problem
+labels: bug
+---
+
+**Describe**
+
+**Steps**
+1.
+2.
+3.
+
+**Expected**
+
+**Actual**
+
+**Env**
+- OS/Browser
+- Commit/Version
+```
+
+---
+
+## .github/ISSUE_TEMPLATE/feature_request.md
+
+```markdown
+---
+name: Feature request
+about: Suggest an idea
+labels: enhancement
+---
+
+**Problem**
+
+**Proposal**
+
+**Alternatives**
+
+**Additional context**
+```
+
+---
+
+## PULL_REQUEST_TEMPLATE.md
+
+```markdown
+## Summary
+
+## Changes
+
+## Screenshots / Video
+
+## Checklist
+- [ ] Lint/Typecheck
+- [ ] Tests (если применимо)
+- [ ] Docs/README обновлены
+```
+
+## README.md — Full replacement
+
+````markdown
+# DeltaYurt — Live Classroom Platform
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/PROJECT_BADGE/deploy-status)](#)
+![Build](https://img.shields.io/badge/build-CI-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+**Live:** https://deltayurt.netlify.app
+**Repo:** https://github.com/kabylovtl-dotcom/DeltaYurt
+
+Интерактивные живые уроки, симуляции и задания. Локализация: EN / RU / KY.
+
+---
+
+## 🚀 Быстрый старт
+
+```bash
+# Требования
+node -v    # >= 20
+
+# Установка
+npm ci || npm install
+cd server && npm ci || npm install && cd ..
+
+# Запуск (два терминала)
+cd server && npm run dev         # API  http://localhost:3005
+# во втором терминале
+npm run dev:frontend             # FE   http://localhost:8081
+
+# Альтернатива (если есть скрипт)
+npm run dev:both
+````
+
+### Переменные окружения
+
+Создай `.env` и `server/.env` при необходимости.
+
+```ini
+# server/.env
+PORT=3005
+NODE_ENV=development
+```
+
+---
+
+## 🧭 Структура проекта
+
+```
+src/
+  components/{classroom,teacher,student,ui}
+  store/            # Zustand
+  types/
+  pages/
+server/
+  index.ts          # Express + Socket.IO
+  seed.ts           # тестовые данные
+public/locales/{en,ru,ky}/{common,teacher,student,sim}.json
+```
+
+---
+
+## 🌍 i18n
+
+* Переключатель языка в UI. Выбор сохраняется в localStorage.
+* Добавить новый язык:
+
+```bash
+mkdir -p public/locales/{lang}/{common,teacher,student,sim}
+cp public/locales/en/*.json public/locales/{lang}/
+```
+
+Обнови `src/i18n.ts` и `src/components/ui/LanguageSwitcher.tsx`.
+
+---
+
+## ✨ Основные функции
+
+* Управление классами, коды подключения, статистика.
+* Живая комната: чат, «поднять руку», управление симуляцией, очередь выступлений.
+* Календарь уроков/дедлайнов с фильтрами.
+* Профили, достижения, лидерборд.
+* Темная/светлая тема, системный режим.
+
+**Стек:** React + TypeScript + Vite + Tailwind + shadcn/ui + Zustand + Framer Motion + Recharts; Realtime: Socket.IO; Backend: Express + TS.
+
+---
+
+## 📡 API и события (кратко)
+
+REST:
+
+```
+GET /api/classes/:code
+POST /api/homeworks/:homeworkId/grade
+```
+
+Socket.IO события: `register_user`, `join_class`, `teacher_start_lesson`, `teacher_present_simulation`, `chat_message`, `raise_hand`, `grade_submission`, и др.
+
+---
+
+## 🧪 Демо-аккаунты (локально)
+
+Учитель: `teacher@deltayurt.test` / `password123`
+Студенты: `student1@deltayurt.test` / `password123`
+Код класса: `DY-TEST1`
+
+> На проде не публикуй реальные пароли. Для демо используй `server/seed.ts`.
+
+---
+
+## 🔐 Безопасность и приватность
+
+* Нет PII‑трекинга; Web Vitals только агрегировано.
+* Политики и контакты в `SECURITY.md`.
+
+---
+
+## 📈 Метрики (для поступления)
+
+Вынеси в `docs/metrics.md` и кратко дублируй здесь:
+
+* **200+ learners**, X уроков/мес, Avg session **Y** мин, D7 retention **Z%**.
+  Добавь 3–4 скрина + короткий demo‑GIF.
+
+---
+
+## 🧰 Скрипты npm (рекомендуется)
+
+```jsonc
+{
+  "scripts": {
+    "dev:frontend": "vite", 
+    "dev:both": "run-p -l dev:server dev:frontend", 
+    "build": "vite build", 
+    "typecheck": "tsc -p tsconfig.json --noEmit", 
+    "lint": "eslint .", 
+    "test": "vitest run --coverage"
+  }
+}
+```
+
+---
+
+## 🧭 Дорожная карта
+
+* [ ] Тесты: vitest + @testing-library/react; e2e: Playwright.
+* [ ] Netlify Deploy Previews для PR.
+* [ ] Sentry performance.
+* [ ] Проверка i18n на пропуски ключей.
+
+---
+
+## 🤝 Вклад и лицензия
+
+См. `CONTRIBUTING.md`. Лицензия MIT в `LICENSE`.
+
+---
+
+## ⚙️ Badge Netlify
+
+Netlify → **Site settings → Status badges** → замени `PROJECT_BADGE` на реальный ID.
+
+```
+```
+Ниже готовые файлы. Скопируй их в корень репозитория `kabylovtl-dotcom/DeltaYurt` с сохранением путей. Потом создай PR `admission-polish` → `main`.
+
+---
+
+## README.md
+
+```markdown
+# DeltaYurt
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/PROJECT_BADGE/deploy-status)](#)
+![Build](https://img.shields.io/badge/build-CI-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+**Live:** https://deltayurt.netlify.app
+
+DeltaYurt — живой онлайн‑класс по физике: интерактивные симуляции, многоязычие EN/RU/KY, мгновенная обратная связь.
+
+## Demo
+> Вставь GIF/видео 10–20c из `docs/demo.gif`.
+
+## Стек
+- React + TypeScript
+- Vite (или Next/Vite — уточни)
+- Socket.IO (реалтайм)
+- i18n JSON (EN/RU/KY)
+- Netlify (хостинг)
+
+## Архитектура
+```
+
+src/
+app/               # провайдеры, роутер
+features/          # модули уроков и симов
+entities/          # модели (Lesson, User, Sim)
+shared/            # ui, lib, hooks, api
+i18n/              # en.json, ru.json, ky.json
+
+````
+
+## Метрики (на сегодня)
+- 200+ learners
+- X уроков/мес
+- Avg session: Y минут
+- Retention D7: Z%
+
+## Как запустить за 60 секунд
+```bash
+node -v   # >= 20
+npm ci || npm install
+npm run dev
+````
+
+Открой [http://localhost:5173](http://localhost:5173) (или порт фреймворка).
+
+## Сборка и деплой
+
+```bash
+npm run build
+```
+
+Netlify собирает из `main`. Для PR — Deploy Previews.
+
+## Локализация
+
+* Все строки — только ключи i18n
+* Скрипт проверки «нет пропусков» (todo)
+
+## Безопасность и приватность
+
+См. [SECURITY.md](SECURITY.md). Нет трекинга PII. Web Vitals только агрегировано.
+
+## Дорожная карта
+
+* [ ] Тесты: vitest + @testing-library/react
+* [ ] e2e: Playwright
+* [ ] Sentry для фронта
+* [ ] PWA (оффлайн‑кэш основных симуляций)
+
+## Лицензия
+
+MIT — см. [LICENSE](LICENSE).
+
+````
+
+---
+
+## LICENSE (MIT)
+```text
+MIT License
+
+Copyright (c) 2025 kabylovtl
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+````
+
+---
+
+## netlify.toml
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/_/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"
+
+# Caching
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+```
+
+---
+
+## .github/workflows/ci.yml
+
+```yaml
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install
+        run: |
+          npm ci || npm install
+      - name: Lint
+        run: |
+          if npm run -s | grep -q '^lint$'; then npm run lint; else echo 'no lint'; fi
+      - name: Typecheck
+        run: |
+          if npm run -s | grep -q '^typecheck$'; then npm run typecheck; else echo 'no typecheck'; fi
+      - name: Test
+        run: |
+          if npm run -s | grep -q '^test$'; then npm test -- --coverage; else echo 'no tests'; fi
+      - name: Build
+        run: |
+          if npm run -s | grep -q '^build$'; then npm run build; else echo 'no build'; fi
+```
+
+---
+
+## CODE_OF_CONDUCT.md
+
+```markdown
+# Code of Conduct
+
+Мы придерживаемся [Contributor Covenant](https://www.contributor-covenant.org/), версия 2.1.
+
+Оскорбления, дискриминация и домогательства неприемлемы. Нарушения сообщайте на `maintainer@deltayurt.example`.
+```
+
+---
+
+## SECURITY.md
+
+```markdown
+# Security Policy
+
+## Supported Versions
+Текущее `main`.
+
+## Reporting a Vulnerability
+Пишите на `security@deltayurt.example` с шагами воспроизведения. Мы ответим в течение 7 дней. Не публикуйте детали до фикса.
+```
+
+---
+
+## CONTRIBUTING.md
+
+```markdown
+# Contributing
+
+1. Форк → ветка `feature/<short>`
+2. `npm ci` → `npm run dev`
+3. Тесты: `npm test` (если есть)
+4. PR в `main` с описанием и скрином/видео
+
+Стиль: TypeScript strict, ESLint + Prettier.
+```
+
+---
+
+## .github/ISSUE_TEMPLATE/bug_report.md
+
+```markdown
+---
+name: Bug report
+about: Report a problem
+labels: bug
+---
+
+**Describe**
+
+**Steps**
+1.
+2.
+3.
+
+**Expected**
+
+**Actual**
+
+**Env**
+- OS/Browser
+- Commit/Version
+```
+
+---
+
+## .github/ISSUE_TEMPLATE/feature_request.md
+
+```markdown
+---
+name: Feature request
+about: Suggest an idea
+labels: enhancement
+---
+
+**Problem**
+
+**Proposal**
+
+**Alternatives**
+
+**Additional context**
+```
+
+---
+
+## PULL_REQUEST_TEMPLATE.md
+
+```markdown
+## Summary
+
+## Changes
+
+## Screenshots / Video
+
+## Checklist
+- [ ] Lint/Typecheck
+- [ ] Tests (если применимо)
+- [ ] Docs/README обновлены
+```
+
+## README.md — Full replacement
+
+````markdown
+# DeltaYurt — Live Classroom Platform
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/PROJECT_BADGE/deploy-status)](#)
+![Build](https://img.shields.io/badge/build-CI-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+**Live:** https://deltayurt.netlify.app
+**Repo:** https://github.com/kabylovtl-dotcom/DeltaYurt
+
+Интерактивные живые уроки, симуляции и задания. Локализация: EN / RU / KY.
+
+---
+
+## 🚀 Быстрый старт
+
+```bash
+# Требования
+node -v    # >= 20
+
+# Установка
+npm ci || npm install
+cd server && npm ci || npm install && cd ..
+
+# Запуск (два терминала)
+cd server && npm run dev         # API  http://localhost:3005
+# во втором терминале
+npm run dev:frontend             # FE   http://localhost:8081
+
+# Альтернатива (если есть скрипт)
+npm run dev:both
+````
+
+### Переменные окружения
+
+Создай `.env` и `server/.env` при необходимости.
+
+```ini
+# server/.env
+PORT=3005
+NODE_ENV=development
+```
+
+---
+
+## 🧭 Структура проекта
+
+```
+src/
+  components/{classroom,teacher,student,ui}
+  store/            # Zustand
+  types/
+  pages/
+server/
+  index.ts          # Express + Socket.IO
+  seed.ts           # тестовые данные
+public/locales/{en,ru,ky}/{common,teacher,student,sim}.json
+```
+
+---
+
+## 🌍 i18n
+
+* Переключатель языка в UI. Выбор сохраняется в localStorage.
+* Добавить новый язык:
+
+```bash
+mkdir -p public/locales/{lang}/{common,teacher,student,sim}
+cp public/locales/en/*.json public/locales/{lang}/
+```
+
+Обнови `src/i18n.ts` и `src/components/ui/LanguageSwitcher.tsx`.
+
+---
+
+## ✨ Основные функции
+
+* Управление классами, коды подключения, статистика.
+* Живая комната: чат, «поднять руку», управление симуляцией, очередь выступлений.
+* Календарь уроков/дедлайнов с фильтрами.
+* Профили, достижения, лидерборд.
+* Темная/светлая тема, системный режим.
+
+**Стек:** React + TypeScript + Vite + Tailwind + shadcn/ui + Zustand + Framer Motion + Recharts; Realtime: Socket.IO; Backend: Express + TS.
+
+---
+
+## 📡 API и события (кратко)
+
+REST:
+
+```
+GET /api/classes/:code
+POST /api/homeworks/:homeworkId/grade
+```
+
+Socket.IO события: `register_user`, `join_class`, `teacher_start_lesson`, `teacher_present_simulation`, `chat_message`, `raise_hand`, `grade_submission`, и др.
+
+---
+
+## 🧪 Демо-аккаунты (локально)
+
+Учитель: `teacher@deltayurt.test` / `password123`
+Студенты: `student1@deltayurt.test` / `password123`
+Код класса: `DY-TEST1`
+
+> На проде не публикуй реальные пароли. Для демо используй `server/seed.ts`.
+
+---
+
+## 🔐 Безопасность и приватность
+
+* Нет PII‑трекинга; Web Vitals только агрегировано.
+* Политики и контакты в `SECURITY.md`.
+
+---
+
+## 📈 Метрики (для поступления)
+
+Вынеси в `docs/metrics.md` и кратко дублируй здесь:
+
+* **200+ learners**, X уроков/мес, Avg session **Y** мин, D7 retention **Z%**.
+  Добавь 3–4 скрина + короткий demo‑GIF.
+
+---
+
+## 🧰 Скрипты npm (рекомендуется)
+
+```jsonc
+{
+  "scripts": {
+    "dev:frontend": "vite", 
+    "dev:both": "run-p -l dev:server dev:frontend", 
+    "build": "vite build", 
+    "typecheck": "tsc -p tsconfig.json --noEmit", 
+    "lint": "eslint .", 
+    "test": "vitest run --coverage"
+  }
+}
+```
+
+---
+
+## 🧭 Дорожная карта
+
+* [ ] Тесты: vitest + @testing-library/react; e2e: Playwright.
+* [ ] Netlify Deploy Previews для PR.
+* [ ] Sentry performance.
+* [ ] Проверка i18n на пропуски ключей.
+
+---
+
+## 🤝 Вклад и лицензия
+
+См. `CONTRIBUTING.md`. Лицензия MIT в `LICENSE`.
+
+---
+
+## ⚙️ Badge Netlify
+
+Netlify → **Site settings → Status badges** → замени `PROJECT_BADGE` на реальный ID.
+
+```
+```
