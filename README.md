@@ -1,6 +1,3 @@
-Ниже готовые файлы. Скопируй их в корень репозитория `kabylovtl-dotcom/DeltaYurt` с сохранением путей. Потом создай PR `admission-polish` → `main`.
-
----
 
 ## README.md
 
