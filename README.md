@@ -855,7 +855,7 @@ Socket.IO события: `register_user`, `join_class`, `teacher_start_lesson`,
 
 ---
 
-## 🧪 Демо-аккаунты (локально)
+## 🧪 Демо-аккаунты 
 
 Учитель: `teacher@deltayurt.test` / `password123`
 Студенты: `student1@deltayurt.test` / `password123`
@@ -869,32 +869,6 @@ Socket.IO события: `register_user`, `join_class`, `teacher_start_lesson`,
 
 * Нет PII‑трекинга; Web Vitals только агрегировано.
 * Политики и контакты в `SECURITY.md`.
-
----
-
-## 📈 Метрики (для поступления)
-
-Вынеси в `docs/metrics.md` и кратко дублируй здесь:
-
-* **200+ learners**, X уроков/мес, Avg session **Y** мин, D7 retention **Z%**.
-  Добавь 3–4 скрина + короткий demo‑GIF.
-
----
-
-## 🧰 Скрипты npm (рекомендуется)
-
-```jsonc
-{
-  "scripts": {
-    "dev:frontend": "vite", 
-    "dev:both": "run-p -l dev:server dev:frontend", 
-    "build": "vite build", 
-    "typecheck": "tsc -p tsconfig.json --noEmit", 
-    "lint": "eslint .", 
-    "test": "vitest run --coverage"
-  }
-}
-```
 
 ---
 
